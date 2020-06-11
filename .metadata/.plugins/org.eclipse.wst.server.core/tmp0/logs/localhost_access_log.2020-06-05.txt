@@ -1,0 +1,5 @@
+127.0.0.1 - - [05/Jun/2020:09:34:38 +0900] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [05/Jun/2020:09:34:44 +0900] "GET /ServletToddler/member/memberView HTTP/1.1" 500 658
+0:0:0:0:0:0:0:1 - - [05/Jun/2020:09:34:44 +0900] "GET /favicon.ico HTTP/1.1" 404 973
+0:0:0:0:0:0:0:1 - - [05/Jun/2020:09:40:35 +0900] "HEAD /ServletToddler/member/deleteMemberInfo?mem_id=a001 HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [05/Jun/2020:09:40:35 +0900] "GET /ServletToddler/member/deleteMemberInfo?mem_id=a001 HTTP/1.1" 200 8687
