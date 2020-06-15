@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="kr.or.ddit.ibatis.factory.SqlMapClientFactory"/>
 <fullyQualifiedTypeName name="com.ibatis.sqlmap.client.SqlMapClient"/>
 <fullyQualifiedTypeName name="java.net.URLEncoder"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="kr.or.ddit.member.service.IMemberServiceImpl"/>
@@ -17,6 +16,11 @@
 <fullyQualifiedTypeName name="kr.or.ddit.member.service.IMemberService"/>
 <fullyQualifiedTypeName name="kr.or.ddit.member.service.MemberServiceImpl"/>
 <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="kr.or.ddit.vo.MemberVO"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prod.service.IProdService"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prod.dao.IProdDAO"/>
+<fullyQualifiedTypeName name="kr.or.ddit.prod.dao.ProdDAOImpl"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="kr.or.ddit.vo.ProdVO"/>
 </qualifiedTypeNameHistroy>

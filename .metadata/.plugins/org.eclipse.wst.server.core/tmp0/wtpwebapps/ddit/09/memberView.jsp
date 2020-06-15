@@ -1,10 +1,11 @@
-<%@page import="kr.or.ddit.member.service.MemberServiceImpl"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
+<%@page import="kr.or.ddit.member.service.MemberServiceImpl"%>
 <%@page import="kr.or.ddit.member.service.IMemberService"%>
-<%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	String mem_id = request.getParameter("mem_id");
 
@@ -14,35 +15,49 @@
 	IMemberService service = MemberServiceImpl.getInstance();
 	MemberVO memberInfo = service.memberInfo(params);
 	
+	// hometell
 	String hometel = memberInfo.getMem_hometel();
 	String ht[] = hometel.split("-");
 	
-	String hptel = memberInfo.getMem_hp();
-	String hp[] = hptel.split("-");
+	// hp
+	String phone = memberInfo.getMem_hp();
+	String hp[] = phone.split("-");
 	
+	// email
 	String email = memberInfo.getMem_mail();
 	String mail[] = email.split("@");
 	
+	// add
 	String zip = memberInfo.getMem_zip();
-	String zips[] = zip.split("-");
+	String zip1[] = zip.split("-");
 	
 	
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
+<script type='text/javascript' src='/ddit/06/common/validation.js'></script> 
 <script type="text/javascript">
-	$(function(){
-		$("#selectHT")val("<%=ht[0]%>").attr("selected", "selected");
+ 	$(function(){
+ 		$('form').submit(function(){
+ 	         $('input[name=mem_bir]').val($('input[name=mem_bir1]').val()+'-'+$('input[name=mem_bir2]').val()+'-'+$('input[name=mem_bir3]').val());
+ 	         $('input[name=mem_zip]').val($('input[name=mem_zip1]').val()+'-'+$('input[name=mem_zip2]').val());
+ 	         $('input[name=mem_hometel]').val($('select[name=mem_hometel1]').val()+'-'+$('input[name=mem_hometel2]').val()+'-'+$('input[name=mem_hometel3]').val());
+ 	         $('input[name=mem_mail]').val($('input[name=mem_mail1]').val()+'@'+$('select[name=mem_mail2]').val());
+ 	         $('input[name=mem_hp]').val($('select[name=mem_hp1]').val()+'-'+$('input[name=mem_hp2]').val()+'-'+$('input[name=mem_hp3]').val());
+ 	      });
+ 		$('#btn3').on('click',function(){
+ 			location.replace('<%=request.getContextPath()%>/09/deleteMemberInfo.jsp?mem_id=<%=mem_id%>');
+		});
+ 		$('#btn4').on('click',function(){
+ 			location.replace('<%=request.getContextPath()%>/09/main.jsp');
+		});
 	})
-	
-	
-	
-	
 </script>
-
 </head>
 <style>
 .fieldName {text-align: center; background-color: #f4f4f4;}
@@ -51,7 +66,7 @@
 td {text-align: left; }
 </style>
 <body>
-<form name="memberForm" method="post">
+<form name="memberForm" action="<%=request.getContextPath()%>/09/updateMemberInfo.jsp" method="post">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr><td rowspan="13" class="pic" colspan="2" style="vertical-align: bottom; width: 150px; text-align: center;">
@@ -66,6 +81,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">성 명</td>
 		<td>
+			<input type="hidden" name="mem_id" value="<%=mem_id%>">
 			<input type="text" name="mem_name" value="<%=memberInfo.getMem_name() %>" disabled="disabled"/>
 		</td>
 	</tr>
@@ -82,11 +98,10 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">생년월일</td>
 		<td>
-		<!-- 1975-05-01 -->
-				<input type="hidden" name="mem_bir" />
-				<input type="text" name="mem_bir1" size="4" value="<%=memberInfo.getMem_bir().substring(0,4)%>" disabled="disabled"/>년
-				<input type="text" name="mem_bir2" size="2" value="<%=memberInfo.getMem_bir().substring(5,7)%>" disabled="disabled"/>월
-				<input type="text" name="mem_bir3" size="2" value="<%=memberInfo.getMem_bir().substring(8,11)%>" disabled="disabled"/>일
+			<input type="hidden" name="mem_bir" />
+			<input type="text" name="mem_bir1" size="4" value="<%=memberInfo.getMem_bir().substring(0,4)%>" disabled="disabled"/>년
+            <input type="text" name="mem_bir2" size="2" value="<%=memberInfo.getMem_bir().substring(5,7)%>" disabled="disabled"/>월
+            <input type="text" name="mem_bir3" size="2" value="<%=memberInfo.getMem_bir().substring(8,11)%>" disabled="disabled"/>일
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -102,7 +117,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">비밀번호</td>
 		<td>
-			<input type="text" name="mem_pass" value="" /> 8 ~ 20 자리 영문자 및 숫자 사용
+			<input type="text" name="mem_pass" value="<%=memberInfo.getMem_pass() %>" /> 8 ~ 20 자리 영문자 및 숫자 사용
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -110,7 +125,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">비밀번호확인</td>
 		<td>
-			<input type="text" name="mem_pass_confirm" value="" /> 8 ~ 20 자리 영문자 및 숫자 사용
+			<input type="text" name="mem_pass_confirm" value="<%=memberInfo.getMem_pass() %>" /> 8 ~ 20 자리 영문자 및 숫자 사용
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -121,7 +136,7 @@ td {text-align: left; }
 		<td>
 			<div>
 			<input type="hidden" name="mem_hometel"/>
-			<select name="mem_hometel1" id="selectHT">
+			<select name="mem_hometel1">
 				<option value="02">02</option>
 				<option value="031">031</option>
 				<option value="032">032</option>								        	
@@ -144,7 +159,6 @@ td {text-align: left; }
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
-	
 	<tr>
 		<td class="fieldName" width="100px" height="25">핸드폰</td>
 		<td>
@@ -181,8 +195,8 @@ td {text-align: left; }
 		<td class="fieldName" width="100px" height="25">주소</td>
 		<td>
 			<input type="hidden" name="mem_zip" />
-			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="<%=zips[0] %>" /> - 
-			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="<%=zips[1] %>" />
+			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="<%=zip1[0] %>" /> - 
+			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="<%=zip1[1] %>" />
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">우편번호검색</button><br>
 			<input type="text" name="mem_add1" id="mem_add1" value="<%=memberInfo.getMem_add1() %>" />
 			<input type="text" name="mem_add2" id="mem_add2" value="<%=memberInfo.getMem_add2() %>" />
@@ -192,7 +206,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">직 업</td>
 		<td>
-			<input type="text" name="mem_job" value="<%=memberInfo.getMem_job()%>"/>
+			<input type="text" name="mem_job" value="<%=memberInfo.getMem_job() %>"/>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>

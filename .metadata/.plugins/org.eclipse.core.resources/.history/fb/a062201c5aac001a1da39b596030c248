@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+    
+<sqlMap namespace="prod">
+	<typeAlias alias = "prodVO" type = "kr.or.ddit.vo.ProdVO"/>
+
+	<sql id="selectALL">
+		SELECT *
+		FROM prod
+		WHERE prod_DELETE = 'n'
+	</sql>
+	
+	<select id = "prodInfo" parameterClass="Map" resultClass="prodVO">
+		<include refid="selectALL"/>
+		AND prod_ID = #prod_id#
+		
+	</select>
+	
+	<select id ="prodList" resultClass="prodVO">
+		<include refid="selectALL"/>
+	</select>
+	
+	<update id ="deleteprodInfo" parameterClass="Map">
+		UPDATE prod
+		SET prod_DELETE = 'y'
+		WHERE prod_ID = #prod_id#
+	</update>
+	
+	<update id="updateprodInfo" parameterClass="prodVO">
+		update member
+		set mem_pass = #mem_pass#, mem_add1 = #mem_add1#, mem_add2 = #mem_add2#,
+		mem_hometel = #mem_hometel#, mem_comtel = #mem_comtel#, mem_hp = #mem_hp#,
+		mem_mail = #mem_mail#, mem_job = #mem_job#, mem_like = #mem_like#
+		where mem_id = #mem_id#
+	</update>
+	
+	<insert id="insertprodInfo" parameterClass="prodVO">
+		insert into member(mem_id,mem_pass,mem_name,mem_zip,mem_regno1,mem_regno2,mem_add1,mem_add2,mem_hometel,mem_comtel,mem_hp,mem_mail,mem_job,mem_like)
+		 values(#mem_id#,#mem_pass#,#mem_name#,#mem_zip#,#mem_regno1#,#mem_regno2#,#mem_add1#,#mem_add2#,#mem_hometel#,#mem_comtel#,#mem_hp#,#mem_mail#,#mem_job#,#mem_like#)
+	</insert>
+</sqlMap>

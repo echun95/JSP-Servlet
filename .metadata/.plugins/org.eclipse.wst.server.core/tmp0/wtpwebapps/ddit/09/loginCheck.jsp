@@ -23,10 +23,9 @@
 		
 		
 	}else{
-		//인증된 회원
-		session.setAttribute("LOGINMEMBERINFO",memberInfo);
+		// 인증된 회원
+		session.setAttribute("LOGINMEMBERINFO", memberInfo);
 		response.sendRedirect(request.getContextPath() + "/09/main.jsp");
 		
 	}
 %>
-
