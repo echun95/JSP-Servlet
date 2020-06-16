@@ -8,6 +8,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import kr.or.ddit.ibatis.factory.SqlMapClientFactory;
 import kr.or.ddit.member.dao.IMemberDao;
 import kr.or.ddit.member.dao.MemberDaoImpl;
+import kr.or.ddit.vo.LProdVO;
 import kr.or.ddit.vo.ProdVO;
 
 public class ProdDAOImpl implements IProdDAO {
@@ -45,6 +46,10 @@ public class ProdDAOImpl implements IProdDAO {
 	@Override
 	public void deleteProdInfo(Map<String, String> params) throws Exception {
 		smc.delete("prod.deleteProdInfo",params);
+	}
+	@Override
+	public List<LProdVO> lprodList() throws Exception {
+		return smc.queryForList("prod.lprodList");
 	}
 
 }

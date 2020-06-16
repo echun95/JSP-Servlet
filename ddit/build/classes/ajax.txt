@@ -1,12 +1,12 @@
-XMLHttpRequest ajax Á¤¸®
+XMLHttpRequest ajax ì •ë¦¬
 
 function createXMLHttpRequest(){
 	var xmlHttp;
 	if(window.ActiveXObject){
-		// IE¿¡¼­ XMLHttpRequest °´Ã¼ Ãëµæ
+		// IEì—ì„œ XMLHttpRequest ê°ì²´ ì·¨ë“
 		xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
 	}else{
-		// IE ¿Ü ºê¶ó¿ìÁ® XMLHttpRequest °´Ã¼ Ãëµæ
+		// IE ì™¸ ë¸Œë¼ìš°ì ¸ XMLHttpRequest ê°ì²´ ì·¨ë“
 		xmlHttp = new XMLHttpRequest();
 	}
 	return xmlHttp;
@@ -14,27 +14,27 @@ function createXMLHttpRequest(){
 
 function idCheck(){
 	if(document.frm.mem_id.value == ''){
-		alert('¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
+		alert('ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
 		document.frm.mem_id.focus();
 		return;
 	}
 	
 	var xmlHttp = createXMLHttpRequest();
 	xmlHttp.onreadystatechange = function(){
-		// readyState 0 : open() ÇÔ¼ö È£Ãâ Àü
-		//            1 : open() ÇÔ¼ö È£Ãâ ÈÄ send() ÇÔ¼ö È£Ãâ Àü
-		//            2 : send() ÇÔ¼ö È£Ãâ ÈÄ ¼­¹öÀÇ Á¤»óÀûÀÎ ÀÀ´ä ½ÅÈ£ ¾øÀ½
-		//            3 : ¼­¹ö·ÎºÎÅÍ ÀÀ´ä µ¥ÀÌÅÍ ¼ö½Å Áß
-		//            4 : ¼­¹ö·ÎºÎÅÍ ÀÀ´ä µ¥ÀÌÅÍ ¼ö½Å ¿Ï·á
+		// readyState 0 : open() í•¨ìˆ˜ í˜¸ì¶œ ì „
+		//            1 : open() í•¨ìˆ˜ í˜¸ì¶œ í›„ send() í•¨ìˆ˜ í˜¸ì¶œ ì „
+		//            2 : send() í•¨ìˆ˜ í˜¸ì¶œ í›„ ì„œë²„ì˜ ì •ìƒì ì¸ ì‘ë‹µ ì‹ í˜¸ ì—†ìŒ
+		//            3 : ì„œë²„ë¡œë¶€í„° ì‘ë‹µ ë°ì´í„° ìˆ˜ì‹  ì¤‘
+		//            4 : ì„œë²„ë¡œë¶€í„° ì‘ë‹µ ë°ì´í„° ìˆ˜ì‹  ì™„ë£Œ
 		if(xmlHttp.readyState == 4){
-			// 200  : Á¤»ó È£Ãâ ¹× Á¤»ó ÀÀ´ä ¿Ü 404 µî
+			// 200  : ì •ìƒ í˜¸ì¶œ ë° ì •ìƒ ì‘ë‹µ ì™¸ 404 ë“±
 			if(xmlHttp.status == 200){
 				if("text/xml" == 
 					xmlHttp.getResponseHeader("Content-Type").substring(0,
 							xmlHttp.getResponseHeader("Content-Type").indexOf(";"))){
 					var xmlDoc = xmlHttp.responseXML;
 					
-// 					xmlDataPush.jsp È£Ãâ½Ã
+// 					xmlDataPush.jsp í˜¸ì¶œì‹œ
 // 					var subNodeArr = xmlDoc.getElementsByTagName("member")[0].childNodes;
 // 					for(var i=0; i<subNodeArr.length; i++){
 // 						window.console.log(i + " / " + subNodeArr[i].text);
@@ -42,14 +42,14 @@ function idCheck(){
 					
 // 					window.console.log(xmlDoc.getElementsByTagName("member")[0].text);
 					
-// 					window.console.log("members -> Ã¹ member id °ª : " + 
+// 					window.console.log("members -> ì²« member id ê°’ : " + 
 // 							xmlDoc.getElementsByTagName("member")[0].getAttribute('id'));
-// 					window.console.log("members -> Ã¹ mem_name °ª : " + xmlDoc.getElementsByTagName("mem_name")[0].text);
+// 					window.console.log("members -> ì²« mem_name ê°’ : " + xmlDoc.getElementsByTagName("mem_name")[0].text);
 					var rtn = xmlDoc.getElementsByTagName('result')[0].getAttribute('flag');
 					if('yes' == rtn){
-						alert('ÀÌ¹Ì µî·ÏµÈ ¾ÆÀÌµğÀÔ´Ï´Ù.');
+						alert('ì´ë¯¸ ë“±ë¡ëœ ì•„ì´ë””ì…ë‹ˆë‹¤.');
 					}else{
-						alert('»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.');
+						alert('ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.');
 					}
 				}
 				if("text/plain"){
@@ -66,37 +66,37 @@ function idCheck(){
 }
 
 
-jQuery AJAX Á¤¸®
+jQuery AJAX ì •ë¦¬
 
 1)
 $.ajax({
     type : "POST" //"POST", "GET"
     , async : true //true, false
     , url : "Inquiry.jsp" //Request URL
-    , dataType : "html" //Àü¼Û¹ŞÀ» µ¥ÀÌÅÍÀÇ Å¸ÀÔ 
-                        //"xml", "html", "script", "json" µî ÁöÁ¤ °¡´É
-                        //¹ÌÁöÁ¤½Ã ÀÚµ¿ ÆÇ´Ü
-    , timeout : 30000   //Á¦ÇÑ½Ã°£ ÁöÁ¤
+    , dataType : "html" //ì „ì†¡ë°›ì„ ë°ì´í„°ì˜ íƒ€ì… 
+                        //"xml", "html", "script", "json" ë“± ì§€ì • ê°€ëŠ¥
+                        //ë¯¸ì§€ì •ì‹œ ìë™ íŒë‹¨
+    , timeout : 30000   //ì œí•œì‹œê°„ ì§€ì •
     , cache : false     //true, false
     , data : $("#inputForm").serialize() 
-                        //¼­¹ö¿¡ º¸³¾ ÆÄ¶ó¸ŞÅÍ 
-                        //form¿¡ serialize() ½ÇÇà½Ã a=b&c=d ÇüÅÂ·Î »ı¼ºµÇ¸ç ÇÑ±ÛÀº UTF-8 ¹æ½ÄÀ¸·Î ÀÎÄÚµù
-                        //"a=b&c=d" ¹®ÀÚ¿­·Î Á÷Á¢ ÀÔ·Â °¡´É
+                        //ì„œë²„ì— ë³´ë‚¼ íŒŒë¼ë©”í„° 
+                        //formì— serialize() ì‹¤í–‰ì‹œ a=b&c=d í˜•íƒœë¡œ ìƒì„±ë˜ë©° í•œê¸€ì€ UTF-8 ë°©ì‹ìœ¼ë¡œ ì¸ì½”ë”©
+                        //"a=b&c=d" ë¬¸ìì—´ë¡œ ì§ì ‘ ì…ë ¥ ê°€ëŠ¥
     , contentType: "application/x-www-form-urlencoded;charset=UTF-8"
     , error : function(request, status, error) {
-                              //Åë½Å ¿¡·¯ ¹ß»ı½Ã Ã³¸®
+                              //í†µì‹  ì—ëŸ¬ ë°œìƒì‹œ ì²˜ë¦¬
                               alert("code : " + request.status + "\r\nmessage : " + request.reponseText);
               }
     , success : function(response, status, request) {
-                              //Åë½Å ¼º°ø½Ã Ã³¸®
+                              //í†µì‹  ì„±ê³µì‹œ ì²˜ë¦¬
                              $('#resultDIV').append(response);    
               }
     , beforeSend: function() {
-                              //Åë½ÅÀ» ½ÃÀÛÇÒ¶§ Ã³¸®
+                              //í†µì‹ ì„ ì‹œì‘í• ë•Œ ì²˜ë¦¬
                              $('#ajax_indicator').show().fadeIn('fast'); 
               }
     , complete: function() {
-                             //Åë½ÅÀÌ ¿Ï·áµÈ ÈÄ Ã³¸®
+                             //í†µì‹ ì´ ì™„ë£Œëœ í›„ ì²˜ë¦¬
                              $('#ajax_indicator').fadeOut();
               }
     });
@@ -104,7 +104,7 @@ $.ajax({
 
 2)
 var params = "prodId=" + encodeURIComponent(prodId);
-// 1. ¿äÃ» uri ¹× Àü´Ş ÆÄ¶ó¸ŞÅÍ ¼³Á¤. 2. Åë½Å ¼º°ø½Ã success ÀÌº¥Æ® ÇÚµé·¯ ¼³Á¤
+// 1. ìš”ì²­ uri ë° ì „ë‹¬ íŒŒë¼ë©”í„° ì„¤ì •. 2. í†µì‹  ì„±ê³µì‹œ success ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ ì„¤ì •
 $.getJSON(
 	"<%=request.getContextPath()%>/getProdDetail.do?" + params,
 	function(result){
@@ -112,7 +112,7 @@ $.getJSON(
 		if(code=="success"){
 			var prodDetail = result.data;
 			var html = "<table border='1' width='500' align='center'>";
-			html += "<tr><td width='150'>Ç×¸ñ</td><td>³»¿ë</td></tr>";
+			html += "<tr><td width='150'>í•­ëª©</td><td>ë‚´ìš©</td></tr>";
 			html += "<tr><td>PROD_ID</td><td>" + prodDetail.id +"</td></tr>";
 			html += "<tr><td>PROD_NAME</td><td>" + prodDetail.name +"</td></tr>";
 			html += "<tr><td>PROD_LGU</td><td>" + prodDetail.lgu +"</td></tr>";
@@ -128,15 +128,15 @@ $.getJSON(
 				
 		}else{
 			var message = result.message;
-			alert("¿¡·¯ : " + message);
+			alert("ì—ëŸ¬ : " + message);
 		}
 	}
 );
 
 
 3)
-// ajaxComplete()´Â ¼Û,¼ö½Å ¼º°ø ¹× ½ÇÆĞ ¸ğµÎ È£ÃâµÊ.
-$('¼¿·ºÅÍ').ajaxComplete(function(event, xmlHttpRequest, settings){
+// ajaxComplete()ëŠ” ì†¡,ìˆ˜ì‹  ì„±ê³µ ë° ì‹¤íŒ¨ ëª¨ë‘ í˜¸ì¶œë¨.
+$('ì…€ë ‰í„°').ajaxComplete(function(event, xmlHttpRequest, settings){
 	$(this).append('<h1>AjaxComplete</h1>')
   }).ajaxError(function(){
 	$(this).append('<h1>AjaxError</h1>')
@@ -148,8 +148,8 @@ $('¼¿·ºÅÍ').ajaxComplete(function(event, xmlHttpRequest, settings){
 	$(this).append('<h1>AjaxStart</h1>')
   });
 
-// load() ÇÔ¼ö¸¦ ÀÌ¿ëÇÑ AJAX Åë½Å ½ÃÀÛ
-$('¼¿·ºÅÍ').load(url);
+// load() í•¨ìˆ˜ë¥¼ ì´ìš©í•œ AJAX í†µì‹  ì‹œì‘
+$('ì…€ë ‰í„°').load(url);
 
 4)
 $.get({

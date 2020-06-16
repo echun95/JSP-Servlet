@@ -5,7 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<!--
+	javascript 유니코드(UTF-8) 인코딩						/		디코딩
+							escape()						unescape() : 유니코드 형식으로 인코딩/디코딩
+																		 URL 표현시 활용기호("or / or ? etc ...)를 포함
+							encodeURI()						decodeURI() : 유니코드 형식으로 인코딩/디코딩
+															 			  URL 표현시 활용기호("or / or ? etc ...)를 포함하지 않는다.
+							encodeURIComponent()			decodeURIComponent() : 유니코드 형식으로 인코딩/디코딩
+															 					        단순 문자 또는 문자열
+ -->
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 <script type='text/javascript' src='/ddit/js/common/validation.js'></script>
 <script type='text/javascript' src="<%=request.getContextPath()%>/js/common/cookieControl.js"></script>
@@ -27,6 +35,50 @@ $(function(){
 		location.replace('<%=request.getContextPath()%>/09/main.jsp');
 	});
 });
+
+function idCheck(){
+	if (!$('input[name=mem_id]').val().validationID()) {
+		alert('아이디를 바르게 입력해주세요');
+		return false;
+	}	
+	$.ajax({
+		//type : POST  디폴트가 POST
+		//async : true 디폴트가 true
+		//timeout : 디폴트 무제한
+		url : '<%=request.getContextPath()%>/09/idCheck.jsp',
+		data : {mem_id : $('input[name=mem_id]').val()},
+		dataType : 'JSON',
+		error : function(result){
+					alert('error code : ' + result.status + 
+							' | message : ' + result.responseText);
+				},
+		success : function(result){
+					//{"flag" : "true" | "false"}
+					if(eval(result.flag)){
+						alert('사용할수있는 아이디입니다.');
+						$('input[name=mem_pass]').focus();
+					}else{
+						alert('사용할수없는 아이디입니다.');
+						$('input[name=mem_id]').val('');
+					}
+				}
+		
+	});
+};
+function zipcodePopup(){
+	//document 팝업 - 모달 : 출력되는 팝업에 존재하는 포커스를 잃지않으면(팝업 종료), 포커스 이동이 불가
+	//				모달리스 : 출력되는 팝업에 존재하는 포커스가 존재해도 자유롭게 포커스 이동이 가능 
+	//아귀먼트 : 1. url
+	//		 2. 팝업의 타이틀
+	//		 3. 옵션(브라우저별 상이)
+	
+	var url = '<%=request.getContextPath()%>/09/zipcodeSearchForm.jsp';
+	var opts = 'width=400px, height=450px, status=no, resizable=no, scrollbars=no';
+	window.open(url,'우편번호검색',opts);	
+	
+	
+};
+
 </script>
 </head>
 <style>
@@ -78,7 +130,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">아이디</td>
 		<td>
-			<input type="text" name="mem_id" value="">&nbsp;&nbsp;<b><a href="#">[ID 중복검사]</a></b>
+			<input type="text" name="mem_id" value="">&nbsp;&nbsp;<b><a href="javascript:idCheck();">[ID 중복검사]</a></b>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -194,7 +246,7 @@ td {text-align: left; }
 			<input type="hidden" name="mem_zip" />
 			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="" /> - 
 			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="" />
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="button">우편번호검색</button><br>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onclick="zipcodePopup();" type="button">우편번호검색</button><br>
 			<input type="text" name="mem_add1" id="mem_add1" value="" />
 			<input type="text" name="mem_add2" id="mem_add2" value="" />
 		</td>

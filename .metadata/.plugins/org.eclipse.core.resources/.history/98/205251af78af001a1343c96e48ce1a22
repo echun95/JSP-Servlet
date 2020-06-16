@@ -1,0 +1,25 @@
+<%@page import="kr.or.ddit.vo.MemberVO"%>
+<%@page import="kr.or.ddit.member.service.MemberServiceImpl"%>
+<%@page import="kr.or.ddit.member.service.IMemberService"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("mem_id","b001");
+	IMemberService service = MemberServiceImpl.getInstance();
+	MemberVO memberInfo = service.memberInfo(params);
+	
+	//저장영역(Scope)을 포함하는 기본객체 : request, session, application, pageContext
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

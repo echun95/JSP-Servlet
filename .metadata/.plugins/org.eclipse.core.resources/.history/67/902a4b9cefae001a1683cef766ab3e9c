@@ -1,0 +1,26 @@
+<%@page import="kr.or.ddit.buyer.service.BuyerServiceImpl"%>
+<%@page import="kr.or.ddit.buyer.service.IBuyerService"%>
+<%@page import="org.codehaus.jackson.map.ObjectMapper"%>
+<%@page import="kr.or.ddit.vo.ZipcodeVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.zipcode.service.ZipcodeServiceImpl"%>
+<%@page import="kr.or.ddit.zipcode.service.IZipcodeService"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/plain; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	String buyer_id= request.getParameter("buyer_id");
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("buyer_id", buyer_id);
+	
+	
+	IBuyerService service = BuyerServiceImpl.getInstance();
+	//웹 애플리케이션 : 테이블 1개당 service, dao, vo가 하나씩 맵핑.
+	IZipcodeService service = ZipcodeServiceImpl.getInstance();
+	List<ZipcodeVO> zipcodeList = service.zipcodeList(params);
+	ObjectMapper jsonDataConvertor = new ObjectMapper();
+	String jsonData = jsonDataConvertor.writeValueAsString(zipcodeList);
+	out.print(jsonData);
+%>

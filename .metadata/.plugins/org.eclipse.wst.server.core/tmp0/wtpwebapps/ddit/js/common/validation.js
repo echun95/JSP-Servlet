@@ -54,8 +54,16 @@ String.prototype.validationHP = function(){
 	return /^01(0|1|6|7|9)-\d{3,4}-\d{4}$/.test(this);
 };
 
+String.prototype.validationDONG = function(){
+	// '대흥동'.validationDONG();
+	return /^[가-힣]{2,6}$/.test(this);
+};
 
-
+String.prototype.validationprodID = function(){
+	//<input type=test name = mem_id/>
+	// "a001".validationID();
+	return /^[P]{1}[0-9]{9}$/.test(this);
+};
 
 
 

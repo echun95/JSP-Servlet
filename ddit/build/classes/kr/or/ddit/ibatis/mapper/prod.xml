@@ -6,7 +6,7 @@
     
 <sqlMap namespace="prod">
 	<typeAlias alias = "prodVO" type = "kr.or.ddit.vo.ProdVO"/>
-
+	<typeAlias alias="lprodVO" type="kr.or.ddit.vo.LProdVO"/>
 	<sql id="selectALL">
 		SELECT *
 		FROM prod
@@ -55,4 +55,9 @@
         	#prod_price#, #prod_sale#, #prod_outline#, #prod_detail#, #prod_qtyin#,
         	#prod_totalstock#, #prod_properstock#, to_date(#prod_insdate#,'YY/MM/DD HH24:MI:SS'))
 	</insert>
+	<select id="lprodList" resultClass="lprodVO">
+		select *
+		from lprod
+	</select>
+	
 </sqlMap>

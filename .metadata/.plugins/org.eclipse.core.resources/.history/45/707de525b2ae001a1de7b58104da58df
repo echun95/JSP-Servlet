@@ -1,0 +1,26 @@
+package kr.or.ddit.zipcode.service;
+
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.vo.ZipcodeVO;
+
+public class ZipcodeServiceImpl implements IZipcodeService{
+	private static IZipcodeService service = new ZipcodeServiceImpl();
+	
+	
+	private ZipcodeServiceImpl(){
+		
+	}
+	
+	public static IZipcodeService getInstance(){
+		return (service==null) ? service = new ZipcodeServiceImpl() : service;
+	}
+	
+	@Override
+	public List<ZipcodeVO> zipcodeList(Map<String, String> params) {
+		
+		return null;
+	}
+
+}

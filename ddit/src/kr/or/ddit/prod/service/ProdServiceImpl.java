@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.prod.dao.IProdDAO;
 import kr.or.ddit.prod.dao.ProdDAOImpl;
+import kr.or.ddit.vo.LProdVO;
 import kr.or.ddit.vo.ProdVO;
 
 public class ProdServiceImpl implements IProdService{
@@ -71,6 +72,17 @@ public class ProdServiceImpl implements IProdService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<LProdVO> lprodList() {		
+		List<LProdVO> list = null;
+		try {
+			list = dao.lprodList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }
