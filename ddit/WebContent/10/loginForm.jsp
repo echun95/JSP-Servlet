@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-   String message =  request.getParameter("message");
-%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="registMemberURI" value="/09/main.jsp?contentPage=memberForm.jsp"></c:url>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +15,8 @@
       <script type='text/javascript' src="<%=request.getContextPath()%>/js/common/cookieControl.js"></script>
       <script type='text/javascript'>
       $(function(){
-            if('<%=message%>' != 'null'){
-               alert('<%=message%>');
+            if('${!empty param.message}'){
+               alert('${param.message}');
             }
             
             if(Get_Cookie('mem_id')){
@@ -89,7 +88,7 @@
 									<td><input type="password" name="mem_pass" class="box" tabindex="3" height="18" /></td>
 								</tr>
 								<tr>
-									<td colspan="3" align="right"><a href="<%=request.getContextPath()%>/09/main.jsp?contentPage=memberForm.jsp">회원가입을 원하세요??</a></td>
+									<td colspan="3" align="right"><a href='${registMemberURI }'>회원가입을 원하세요??</a></td>
 								</tr>
 							</table>
 						</td>

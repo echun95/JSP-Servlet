@@ -1,28 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	// http://localhost/ddit/09/main.jsp (default : 전체 회원 리스트 출력)
-	// http://localhost/ddit/09/main.jsp?contentPage=/09/memberForm.jsp
-	// http://localhost/ddit/09/main.jsp?contentPage=/09/memberView.jsp
-	// http://localhost/ddit/09/main.jsp?contentPage=/09/memberList.jsp
-	String contentPage = request.getParameter("contentPage");
-	if(contentPage == null){
-		contentPage = "/09/memberList.jsp";
-	}
-	
-	// 1. loginForm.jsp 활용
-	// 2. 로그인 후 main.jsp 요청 시작
-	// 3. memberList.jsp
-	//		[검색] | [글쓰기] 미구현
-	// 4. loginFor.jsp에서 '회원가입을 원하세요? 클릭시 memberForm.jsp 내
-	// 	    컨텐츠 영역에 memberForm.jsp 컨텐츠 출력
-	// 5. memberForm.jsp 컨텐츠의 [가입하기] | [목록] 버튼 처리
-	//	  [가입하기] 클릭 /ddit/09/insertMemberinfo.jsp 요청
-	// 	    가입 처리 후 loginForm.jsp로 리다이렉트 처리
-	// 6. memberList.jsp 에서 특정 회원정보 클릭 후 main.jsp 내 
-	//	    컨텐츠 영역에 memberView.jsp 컨텐츠 출력
-	//	  [수정하기] | [삭제(탈퇴)] | [목록] 버튼 처리
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,19 +30,22 @@
 									  해당 jsp가 응답객체의 출력버퍼에 저장한 응답 컨텐츠를 
 									 include 액션 태그가 선언된 코드라인에 추가.
 			 -->
-			<jsp:include page="/09/layout/header.jsp" />
+			 <%-- <jsp:include page=""></jsp:include> --%>
+			 <c:import url="/09/layout/header.jsp"></c:import>
 		</div>
 		<p style="clear: both;"></p>
 		<div>
 			<div class="left">
-				<jsp:include page="/09/layout/left.jsp" />
+				<c:import url="/09/layout/left.jsp"></c:import>
 			</div>
 			<div id="content" style="height: 600px; margin-left: 250px; overflow: scroll;">
-				<jsp:include page="<%=contentPage %>" />
+				<%-- <jsp:include page="<%=contentPage %>" /> --%>
+				<c:import url="${!empty param.contentPage ? param.contentPage : '/09/memberList.jsp' }"></c:import>
 			</div>
 		</div>
 		<div>
-			<jsp:include page="/09/layout/footer.jsp" />
+			<%-- <jsp:include page=""></jsp:include> --%>
+			<c:import url="/09/layout/footer.jsp"></c:import>
 		</div>
 	</div>
 </center>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="mainURI" value="/09/main.jsp"></c:url>
+<c:url var="idCheckURI" value="/09/idCheck.jsp"></c:url>
+<c:url var="zipcodeSearchFormURI" value="/09/zipcodeSearchForm.jsp"></c:url>
+<c:url var="insertMemberURI" value="/09/insertMember.jsp"></c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +21,7 @@
  -->
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
 <script type='text/javascript' src='/ddit/js/common/validation.js'></script>
-<script type='text/javascript' src="<%=request.getContextPath()%>/js/common/cookieControl.js"></script>
+<script type='text/javascript' src="${pageContext.request.contextPath}/js/common/cookieControl.js"></script>
 	
 		
 	
@@ -32,7 +37,7 @@ $(function(){
       });
       
   	$('#btn3').on('click', function(){
-		location.replace('<%=request.getContextPath()%>/09/main.jsp');
+		location.replace('${mainURI}');
 	});
 });
 
@@ -45,7 +50,7 @@ function idCheck(){
 		//type : POST  디폴트가 POST
 		//async : true 디폴트가 true
 		//timeout : 디폴트 무제한
-		url : '<%=request.getContextPath()%>/09/idCheck.jsp',
+		url : '${idCheckURI}',
 		data : {mem_id : $('input[name=mem_id]').val()},
 		dataType : 'JSON',
 		error : function(result){
@@ -72,7 +77,7 @@ function zipcodePopup(){
 	//		 2. 팝업의 타이틀
 	//		 3. 옵션(브라우저별 상이)
 	
-	var url = '<%=request.getContextPath()%>/09/zipcodeSearchForm.jsp';
+	var url = '${zipcodeSearchFormURI}';
 	var opts = 'width=400px, height=450px, status=no, resizable=no, scrollbars=no';
 	window.open(url,'우편번호검색',opts);	
 	
@@ -88,7 +93,7 @@ function zipcodePopup(){
 td {text-align: left; }
 </style>
 <body>
-<form name="memberForm" action="<%=request.getContextPath() %>/09/insertMember.jsp" method="post">
+<form name="memberForm" action="${insertMemberURI}" method="post">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr><td rowspan="13" class="pic" colspan="2" style="vertical-align: bottom; width: 150px; text-align: center;">

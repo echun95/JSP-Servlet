@@ -5,7 +5,13 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<c:url var="deleteMemberInfoURI" value="/09/deleteMemberInfo.jsp"></c:url>
+<c:url var="mainURI" value="/09/main.jsp"></c:url>
+<c:url var="updateMemberInfoURI" value="/09/updateMemberInfo.jsp"></c:url>
+
 <%
 	String mem_id = request.getParameter("mem_id");
 
@@ -15,22 +21,26 @@
 	IMemberService service = MemberServiceImpl.getInstance();
 	MemberVO memberInfo = service.memberInfo(params);
 	
+	request.setAttribute("memberInfo", memberInfo);
+	
+	
 	// hometell
 	String hometel = memberInfo.getMem_hometel();
 	String ht[] = hometel.split("-");
+	request.setAttribute("ht", ht);
 	
 	// hp
 	String phone = memberInfo.getMem_hp();
 	String hp[] = phone.split("-");
-	
+	request.setAttribute("hp",hp);
 	// email
 	String email = memberInfo.getMem_mail();
 	String mail[] = email.split("@");
-	
+	request.setAttribute("mail",mail);
 	// add
 	String zip = memberInfo.getMem_zip();
 	String zip1[] = zip.split("-");
-	
+	request.setAttribute("zip1",zip1);
 	
 
 %>
@@ -51,10 +61,10 @@
  	         $('input[name=mem_hp]').val($('select[name=mem_hp1]').val()+'-'+$('input[name=mem_hp2]').val()+'-'+$('input[name=mem_hp3]').val());
  	      });
  		$('#btn3').on('click',function(){
- 			location.replace('<%=request.getContextPath()%>/09/deleteMemberInfo.jsp?mem_id=<%=mem_id%>');
+ 			location.replace('${deleteMemberInfoURI}?mem_id=${memberInfo.mem_id}');
 		});
  		$('#btn4').on('click',function(){
- 			location.replace('<%=request.getContextPath()%>/09/main.jsp');
+ 			location.replace('${mainURI}');
 		});
 	})
 </script>
@@ -66,7 +76,7 @@
 td {text-align: left; }
 </style>
 <body>
-<form name="memberForm" action="<%=request.getContextPath()%>/09/updateMemberInfo.jsp" method="post">
+<form name="memberForm" action="${updateMemberInfoURI }" method="post">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr><td rowspan="13" class="pic" colspan="2" style="vertical-align: bottom; width: 150px; text-align: center;">
@@ -81,16 +91,16 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">성 명</td>
 		<td>
-			<input type="hidden" name="mem_id" value="<%=mem_id%>">
-			<input type="text" name="mem_name" value="<%=memberInfo.getMem_name() %>" disabled="disabled"/>
+			<input type="hidden" name="mem_id" value="${memberInfo.mem_id }">
+			<input type="text" name="mem_name" value="${memberInfo.mem_name }" disabled="disabled"/>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr>
 		<td class="fieldName" width="100px" height="25">주민등록번호</td>
 		<td>
-			<input type="text" name="mem_regno1" size="6" value="<%=memberInfo.getMem_regno1() %>" disabled="disabled"/>
-  			<input type="text" name="mem_regno2" size="7" value="<%=memberInfo.getMem_regno2() %>" disabled="disabled"/>
+			<input type="text" name="mem_regno1" size="6" value="${memberInfo.mem_regno1 }" disabled="disabled"/>
+  			<input type="text" name="mem_regno2" size="7" value="${memberInfo.mem_regno2 }" disabled="disabled"/>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -99,9 +109,9 @@ td {text-align: left; }
 		<td class="fieldName" width="100px" height="25">생년월일</td>
 		<td>
 			<input type="hidden" name="mem_bir" />
-			<input type="text" name="mem_bir1" size="4" value="<%=memberInfo.getMem_bir().substring(0,4)%>" disabled="disabled"/>년
-            <input type="text" name="mem_bir2" size="2" value="<%=memberInfo.getMem_bir().substring(5,7)%>" disabled="disabled"/>월
-            <input type="text" name="mem_bir3" size="2" value="<%=memberInfo.getMem_bir().substring(8,11)%>" disabled="disabled"/>일
+			<input type="text" name="mem_bir1" size="4" value="${fn:substring(memberInfo.mem_bir,0,4)}" disabled="disabled"/>년
+            <input type="text" name="mem_bir2" size="2" value="${fn:substring(memberInfo.mem_bir,5,7)}" disabled="disabled"/>월
+            <input type="text" name="mem_bir3" size="2" value="${fn:substring(memberInfo.mem_bir,8,11)}" disabled="disabled"/>일
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -109,7 +119,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">아이디</td>
 		<td>
-			<input type="text" name="mem_id" value="<%=memberInfo.getMem_id() %>" disabled="disabled">
+			<input type="text" name="mem_id" value="${memberInfo.mem_id }" disabled="disabled">
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -117,7 +127,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">비밀번호</td>
 		<td>
-			<input type="text" name="mem_pass" value="<%=memberInfo.getMem_pass() %>" /> 8 ~ 20 자리 영문자 및 숫자 사용
+			<input type="text" name="mem_pass" value="${memberInfo.mem_pass }" /> 8 ~ 20 자리 영문자 및 숫자 사용
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -125,7 +135,7 @@ td {text-align: left; }
 	<tr>
 		<td class="fieldName" width="100px" height="25">비밀번호확인</td>
 		<td>
-			<input type="text" name="mem_pass_confirm" value="<%=memberInfo.getMem_pass() %>" /> 8 ~ 20 자리 영문자 및 숫자 사용
+			<input type="text" name="mem_pass_confirm" value="${memberInfo.mem_pass }" /> 8 ~ 20 자리 영문자 및 숫자 사용
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -153,8 +163,8 @@ td {text-align: left; }
 				<option value="064">064</option>				        					        					        	
 				<option value="070">070</option>				        					        					        	
 			</select>	- 	
-			<input type="text" name="mem_hometel2" size="4" value="<%=ht[1] %>" /> - 
-			<input type="text" name="mem_hometel3" size="4" value="<%=ht[2] %>" />
+			<input type="text" name="mem_hometel2" size="4" value="${ht[1]}" /> - 
+			<input type="text" name="mem_hometel3" size="4" value="${ht[2]}" />
 			</div>
 		</td>
 	</tr>
@@ -169,8 +179,8 @@ td {text-align: left; }
 				<option value="017">017</option>				        	
 				<option value="019">019</option>				        	
 			</select>	-
-			<input type="text" name="mem_hp2" size="4" value="<%=hp[1] %>" /> - 
-			<input type="text" name="mem_hp3" size="4" value="<%=hp[2] %>" />
+			<input type="text" name="mem_hp2" size="4" value="${hp[1] }" /> - 
+			<input type="text" name="mem_hp3" size="4" value="${hp[2] }" />
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
@@ -179,7 +189,7 @@ td {text-align: left; }
 		<td class="fieldName" width="100px" height="25">이메일</td>
 		<td>
 			<input type="hidden" name="mem_mail" />
-			<input type="text" name="mem_mail1" value="<%=mail[0] %>" /> @
+			<input type="text" name="mem_mail1" value="${mail[0] }" /> @
 			<select name="mem_mail2">
 				<option value="naver.com">naver.com</option>
 				<option value="daum.net">daum.net</option>
@@ -195,25 +205,25 @@ td {text-align: left; }
 		<td class="fieldName" width="100px" height="25">주소</td>
 		<td>
 			<input type="hidden" name="mem_zip" />
-			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="<%=zip1[0] %>" /> - 
-			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="<%=zip1[1] %>" />
+			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="${zip1[0]}" /> - 
+			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="${zip1[1]}" />
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">우편번호검색</button><br>
-			<input type="text" name="mem_add1" id="mem_add1" value="<%=memberInfo.getMem_add1() %>" />
-			<input type="text" name="mem_add2" id="mem_add2" value="<%=memberInfo.getMem_add2() %>" />
+			<input type="text" name="mem_add1" id="mem_add1" value="${memberInfo.mem_add1 }" />
+			<input type="text" name="mem_add2" id="mem_add2" value="${memberInfo.mem_add2 }" />
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr>
 		<td class="fieldName" width="100px" height="25">직 업</td>
 		<td>
-			<input type="text" name="mem_job" value="<%=memberInfo.getMem_job() %>"/>
+			<input type="text" name="mem_job" value="${memberInfo.mem_job }"/>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr>
 		<td class="fieldName" width="100px" height="25">취 미</td>
 		<td>
-			<input type="text" name="mem_like" value="<%=memberInfo.getMem_like() %>"/>
+			<input type="text" name="mem_like" value="${memberInfo.mem_like }"/>
 		</td>
 	</tr>
 	<tr><td class="tLine" colspan="2"></td></tr>

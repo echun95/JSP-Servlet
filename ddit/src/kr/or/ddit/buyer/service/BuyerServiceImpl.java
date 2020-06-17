@@ -33,4 +33,65 @@ public class BuyerServiceImpl implements IBuyerService {
 		}
 		return buyerList;
 	}
+
+	@Override
+	public List<Map<String, String>> buyerListAll() {
+		List<Map<String, String>> buyerList = null;
+		try {
+			buyerList = dao.buyerListAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return buyerList;
+	}
+
+	@Override
+	public BuyerVO buyerInfo(String params) {
+		BuyerVO buyerInfo = null;
+		try {
+			buyerInfo = dao.buyerInfo(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return buyerInfo;
+	}
+
+	@Override
+	public void deleteBuyerInfo(String buyer_id) {
+		try {
+			dao.deleteBuyerInfo(buyer_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void updateBuyerInfo(BuyerVO buyerInfo) {
+		try {
+			dao.updateBuyerInfo(buyerInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void insertBuyerInfo(BuyerVO buyerInfo) {
+		try {
+			dao.insertBuyerInfo(buyerInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String selectBuyerId(String buyer_lgu) {
+		String lgu = "";
+		try {
+			lgu = dao.selectBuyerId(buyer_lgu);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lgu;
+	}
 }

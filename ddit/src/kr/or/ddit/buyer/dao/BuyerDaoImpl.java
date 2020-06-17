@@ -29,4 +29,35 @@ public class BuyerDaoImpl implements IBuyerDao {
 		
 		return smc.queryForList("buyer.buyerList", params);
 	}
+
+	@Override
+	public List<Map<String, String>> buyerListAll() throws Exception {
+		return smc.queryForList("buyer.buyerListAll");
+	}
+
+	@Override
+	public BuyerVO buyerInfo(String params) throws Exception {
+		return (BuyerVO)smc.queryForObject("buyer.buyerInfo",params);
+	}
+
+	@Override
+	public void deleteBuyerInfo(String buyer_id) throws Exception {
+		smc.delete("buyer.deleteBuyerInfo",buyer_id);
+	}
+
+	@Override
+	public void updateBuyerInfo(BuyerVO buyerInfo) throws Exception {
+		smc.update("buyer.updateBuyerInfo",buyerInfo);
+	}
+
+	@Override
+	public void insertBuyerInfo(BuyerVO buyerInfo) throws Exception {
+		smc.insert("buyer.insertBuyerInfo",buyerInfo);
+	}
+
+	@Override
+	public String selectBuyerId(String buyer_lgu) throws Exception {
+		return (String)smc.queryForObject("buyer.selectBuyerId",buyer_lgu);
+	}
+	
 }

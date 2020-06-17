@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="customtargetclass" uri="http://www.bagrant.com/taglib/customtargetclass-taglib" %>   
 <c:set var="targetString1" value="function 태그는 java.lang.String 클래스 내 사용이 빈번한 메서드를 태그로 활용할 수 있습니다. "></c:set>
 <c:set var="targetString2" value="Using"></c:set>
 <c:set var="targetString3" value="201호,202호,203호,204호"></c:set>
@@ -27,6 +28,11 @@ split() : ${fn:split(targetString3,',')[0] }<br/>
 <c:set var="targetString4" value="<script type='text/javascript'>alert('알    럿')</script>"></c:set>
 <%-- ${targetString4 }<br/> --%>
 escapeXml() : ${fn:escapeXml(fn:trim(targetString4)) }<br/>
+<h3>사용자 정의 태그 활용</h3>
+plus(10,20) : ${customtargetclass:plus(10,20) }<br/>
+multiple('20',30) : ${customtargetclass:multiple('20',30) }<br/>
+today() : ${customtargetclass:today() }<br/>
+charCount('1234555678','5') : ${customtargetclass:charCount('1234555678','5') }<br/> 
 
 
 

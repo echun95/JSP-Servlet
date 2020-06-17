@@ -64,8 +64,8 @@
 		<td>${memberInfo.mem_regno1 }</td>
 		<td>${memberInfo.mem_regno2 }</td>
 		<td>${memberInfo.mem_add1 }</td>
-	</c:forEach>
 	</tr>
+	</c:forEach>
 </table>
 <c:forEach items="${cookie}" var="currentCookie">
 	${currentCookie.key} : ${currentCookie.value.value}<br/>

@@ -1,0 +1,12 @@
+<%@page import="kr.or.ddit.buyer.service.BuyerServiceImpl"%>
+<%@page import="kr.or.ddit.buyer.service.IBuyerService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String lgu = request.getParameter("lgu");
+	IBuyerService service = BuyerServiceImpl.getInstance();
+	String buyer_lgu = service.selectBuyerId(lgu);
+	//P10103
+	
+	buyer_lgu.substring(0,1);
+%>
