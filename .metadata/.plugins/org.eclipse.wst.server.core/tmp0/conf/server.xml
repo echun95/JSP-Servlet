@@ -126,7 +126,14 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
 
-      <Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ServletToddler" path="/ServletToddler" reloadable="true" source="org.eclipse.jst.jee.server:ServletToddler"/><Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ddit" path="/ddit" reloadable="true" source="org.eclipse.jst.jee.server:ddit"/></Host>
+      <Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ServletToddler" path="/ServletToddler" reloadable="true" source="org.eclipse.jst.jee.server:ServletToddler"/><Context docBase="D:\A_TeachingMaterial\6.JspSpring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ddit" path="/ddit" reloadable="true" source="org.eclipse.jst.jee.server:ddit">
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Resource auth="lyc" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" initialSize="10" maxActive="10" maxIdle="6" maxWait="-1" minIdle="3" name="jdbc/ddit" password="java" removeAbandoned="true" removeAbandonedTimeout="60" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="student">
+	 
+	
+		
+	</Resource>
+</Context></Host>
     </Engine>
   </Service>
 </Server>
