@@ -13,14 +13,40 @@
 		WHERE prod_DELETE = 'n'
 	</sql>
 	
+	
+	<sql id="searchCondition">
+		<dynamic prepend="AND">
+			<isNotEmpty prepend="search_keyword" open="(" close=")">
+				<isEqual property="search_keycode" compareValue="ALL">
+					PROD_LGU LIKE '%'|| #search_keyword#||'%'
+					OR PROD_NAME LIKE '%'|| #search_keyword#||'%'
+					OR BUYER_NAME LIKE '%'|| #search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="PRODLGU">
+					PROD_LGU LIKE '%'|| #search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="PRODNAME">
+					PROD_NAME LIKE '%'|| #search_keyword#||'%'
+				</isEqual>
+				<isEqual property="search_keycode" compareValue="BUYERNAME">
+					BUYER_NAME LIKE '%'|| #search_keyword#||'%'
+				</isEqual>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	
 	<select id = "prodInfo" parameterClass="Map" resultClass="prodVO">
 		<include refid="selectALL"/>
 		AND prod_ID = #prod_id#
 		
 	</select>
 	
-	<select id ="prodList" resultClass="prodVO">
-		<include refid="selectALL"/>
+	<select id ="prodList" resultClass="prodVO" parameterClass="Map">
+		SELECT * 
+		FROM BUYER JOIN PROD ON(BUYER.BUYER_ID = PROD.PROD_BUYER)
+		WHERE PROD.PROD_DELETE = 'n'
+		<include refid="searchCondition"/>
+		
 	</select>
 	
 	<update id ="deleteProdInfo" parameterClass="Map">

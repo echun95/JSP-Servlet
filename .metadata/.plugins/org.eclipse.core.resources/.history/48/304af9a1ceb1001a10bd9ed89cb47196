@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlMap namespace="board">
+	<typeAlias alias = "freeboardVO" type = "kr.or.ddit.vo.FreeboardVO"/>
+
+
+
+
+</sqlMap>

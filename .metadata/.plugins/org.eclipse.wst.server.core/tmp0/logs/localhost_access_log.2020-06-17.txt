@@ -373,3 +373,17 @@
 192.168.206.16 - - [17/Jun/2020:17:28:32 +0900] "GET /ddit/12/main.jsp?contentPage=%2f12%2fbuyerView.jsp?buyer_id=P20202 HTTP/1.1" 200 12017
 192.168.206.16 - - [17/Jun/2020:17:28:33 +0900] "GET /ddit/12/main.jsp HTTP/1.1" 200 14493
 192.168.206.16 - - [17/Jun/2020:17:28:34 +0900] "GET /ddit/12/main.jsp?contentPage=%2f12%2fbuyerView.jsp?buyer_id=P40301 HTTP/1.1" 200 11985
+192.168.206.16 - - [17/Jun/2020:17:29:48 +0900] "GET / HTTP/1.1" 404 951
+192.168.206.16 - - [17/Jun/2020:17:29:50 +0900] "GET /ddit/12/buyerList.jsp HTTP/1.1" 200 8031
+192.168.206.16 - - [17/Jun/2020:17:29:50 +0900] "GET /favicon.ico HTTP/1.1" 404 973
+192.168.206.16 - - [17/Jun/2020:17:29:52 +0900] "GET /ddit/12/main.jsp;jsessionid=2F403A219A7C3A16865ED001C87651C2?contentPage=%2f12%2fbuyerForm.jsp HTTP/1.1" 200 13046
+192.168.206.16 - - [17/Jun/2020:17:29:52 +0900] "GET /ddit/12/lprodList.jsp HTTP/1.1" 200 544
+192.168.206.16 - - [17/Jun/2020:17:29:55 +0900] "GET /ddit/12/selectLgu.jsp?lgu=P403 HTTP/1.1" 200 28
+192.168.206.16 - - [17/Jun/2020:17:30:06 +0900] "POST /ddit/12/insertBuyerInfo.jsp HTTP/1.1" 302 -
+192.168.206.16 - - [17/Jun/2020:17:30:06 +0900] "GET /ddit/12/main.jsp HTTP/1.1" 200 14938
+192.168.206.16 - - [17/Jun/2020:17:30:07 +0900] "GET /ddit/12/main.jsp?contentPage=%2f12%2fbuyerView.jsp?buyer_id=P40302 HTTP/1.1" 200 11999
+192.168.206.16 - - [17/Jun/2020:17:30:11 +0900] "GET /ddit/12/main.jsp HTTP/1.1" 200 14938
+192.168.206.16 - - [17/Jun/2020:17:30:12 +0900] "GET /ddit/12/main.jsp?contentPage=%2f12%2fbuyerView.jsp?buyer_id=P40301 HTTP/1.1" 200 11985
+192.168.206.16 - - [17/Jun/2020:17:30:14 +0900] "GET /ddit/12/deleteBuyerInfo.jsp?buyer_id=P40301 HTTP/1.1" 200 14495
+192.168.206.16 - - [17/Jun/2020:17:30:15 +0900] "GET /ddit/12/main.jsp?contentPage=%2f12%2fbuyerView.jsp?buyer_id=P40302 HTTP/1.1" 200 11999
+192.168.206.16 - - [17/Jun/2020:17:30:18 +0900] "GET /ddit/12/main.jsp HTTP/1.1" 200 14495

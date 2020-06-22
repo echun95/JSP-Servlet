@@ -7,7 +7,7 @@ import kr.or.ddit.vo.BuyerVO;
 
 public interface IBuyerService {
 	public List<BuyerVO> buyerList(Map<String, String> params);
-	public List<Map<String, String>> buyerListAll();
+	public List<Map<String, String>> buyerListAll(Map<String, String> params);
 	public BuyerVO buyerInfo(String params);
 	public void deleteBuyerInfo(String buyer_id);
 	public void updateBuyerInfo(BuyerVO buyerInfo);

@@ -26,10 +26,10 @@ public class ProdServiceImpl implements IProdService{
 	
 	
 	@Override
-	public List<ProdVO> prodList() {
+	public List<ProdVO> prodList(Map<String, String> params) {
 		List<ProdVO> list = null;
 		try {
-			list = dao.prodList();
+			list = dao.prodList(params);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

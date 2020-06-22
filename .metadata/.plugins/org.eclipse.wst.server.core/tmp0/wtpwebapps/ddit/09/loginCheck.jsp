@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.CryptoGenerator"%>
 <%@page import="kr.or.ddit.member.service.MemberServiceImpl"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
@@ -9,6 +10,9 @@
 <%
 	String mem_id = request.getParameter("mem_id");
 	String mem_pass = request.getParameter("mem_pass");
+	
+	mem_id = CryptoGenerator.decryptRSA(session, mem_id);
+	mem_pass = CryptoGenerator.decryptRSA(session, mem_pass);
 	
 	Map<String, String> params = new HashMap<String, String>();
 	params.put("mem_id", mem_id);

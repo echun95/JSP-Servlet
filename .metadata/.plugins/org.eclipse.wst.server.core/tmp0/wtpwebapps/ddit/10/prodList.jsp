@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.vo.ProdVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.prod.service.IProdService"%>
@@ -6,8 +8,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	String search_keyword = request.getParameter("search_keyword");
+	String search_keycode = request.getParameter("search_keycode");
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("search_keyword", search_keyword);
+	params.put("search_keycode", search_keycode);
+	
 	IProdService service = ProdServiceImpl.getInstance();
-	List<ProdVO> list = service.prodList();
+	List<ProdVO> list = service.prodList(params);
 
 %>
 
@@ -68,7 +76,7 @@ $(function(){
 	</table>
 </div>
 <div class="searchForm" align="right" style="margin-top: 10px;">
-	<form method="post" action="">
+	<form method="post" action="${pageContext.request.contextPath }/10/main.jsp">
 		<select name="search_keycode">
 			<option value="ALL">전체</option>
 			<option value="PRODLGU">상품분류코드</option>

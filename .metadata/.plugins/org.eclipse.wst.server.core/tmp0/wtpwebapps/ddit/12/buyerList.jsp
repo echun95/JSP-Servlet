@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.buyer.service.BuyerServiceImpl"%>
@@ -12,8 +13,15 @@
 	<c:param name="contentPage" value="/12/buyerForm.jsp"></c:param>
 </c:url>
 <%
+	String search_keyword = request.getParameter("search_keyword");
+	String search_keycode = request.getParameter("search_keycode");
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("search_keyword", search_keyword);
+	params.put("search_keycode", search_keycode);
+	
+	
 	IBuyerService service = BuyerServiceImpl.getInstance();
-	List<Map<String,String>> buyerListAll = service.buyerListAll();
+	List<Map<String,String>> buyerListAll = service.buyerListAll(params);
 	request.setAttribute("buyerListAll", buyerListAll);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -65,7 +73,7 @@
 	</table>
 </div>
 <div class="searchForm" align="right" style="margin-top: 10px;">
-	<form method="post" action="">
+	<form method="post" action="${pageContext.request.contextPath }/12/main.jsp">
 		<select name="search_keycode">
 			<option value="ALL">전체</option>
 			<option value="BUYERID">거래처코드</option>

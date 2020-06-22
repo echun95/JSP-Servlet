@@ -28,8 +28,8 @@ public class ProdDAOImpl implements IProdDAO {
 	}
 
 	@Override
-	public List<ProdVO> prodList() throws Exception {
-		return smc.queryForList("prod.prodList");
+	public List<ProdVO> prodList(Map<String, String> params) throws Exception {
+		return smc.queryForList("prod.prodList",params);
 	}
 	@Override
 	public ProdVO prodInfo(Map<String, String> params) throws Exception {

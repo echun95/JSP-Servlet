@@ -65,7 +65,12 @@ String.prototype.validationprodID = function(){
 	return /^[P]{1}[0-9]{9}$/.test(this);
 };
 
+String.prototype.validationTITLE = function(){
+	return /^[가-힣a-zA-Z]{1,30}$/.test(this);
+};
 
-
+String.prototype.validationNICKNAME = function(){
+	return /^[가-힣]{2,5}$/.test(this);
+};
 
 

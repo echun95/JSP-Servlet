@@ -11,11 +11,16 @@
 		java JDBC : autoCommit(false)으로 트랜잭션 처리
 		            autoCommit(false)-commit()
 					                 -rollback()
+					                 
 		iBatis JDBC : auto transaction으로 트랜잭션 처리.
 		              iBatis는 모든 쿼리를 트랜잭션 단위로 처리.
 					  로컬 트랜잭션 처리 startTransaction();
 					                     commitTransaction();
 										 endTransaction();
+										 
+										 
+		DBCP(DataBase Connection Pooling)
+												 
 	-->
 	<transactionManager type="JDBC">
 	<dataSource type="SIMPLE">
@@ -45,6 +50,7 @@
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/prod.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/zipcode.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/freeboard.xml"/>
 	
 </sqlMapConfig>
 

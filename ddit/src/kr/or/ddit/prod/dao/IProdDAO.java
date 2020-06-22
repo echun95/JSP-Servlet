@@ -7,7 +7,7 @@ import kr.or.ddit.vo.LProdVO;
 import kr.or.ddit.vo.ProdVO;
 
 public interface IProdDAO {
-	public List<ProdVO> prodList() throws Exception;
+	public List<ProdVO> prodList(Map<String, String> params) throws Exception;
 	public ProdVO prodInfo(Map<String, String> params) throws Exception;
 	public void insertProdInfo(ProdVO vo) throws Exception;
 	public void updateProdInfo(ProdVO vo) throws Exception;

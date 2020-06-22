@@ -8,7 +8,7 @@ import kr.or.ddit.vo.MemberVO;
 public interface IMemberService {
 	
 	public MemberVO memberInfo(Map<String, String> params);
-	public List<MemberVO> memberList();
+	public List<MemberVO> memberList(Map<String, String> params);
 	public void deleteMemberInfo(Map<String, String> params);
 	public void updateMemberInfo(MemberVO memberInfo);
 	public void insertMemberInfo(MemberVO memberInfo);

@@ -35,10 +35,10 @@ public class BuyerServiceImpl implements IBuyerService {
 	}
 
 	@Override
-	public List<Map<String, String>> buyerListAll() {
+	public List<Map<String, String>> buyerListAll(Map<String, String> params) {
 		List<Map<String, String>> buyerList = null;
 		try {
-			buyerList = dao.buyerListAll();
+			buyerList = dao.buyerListAll(params);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

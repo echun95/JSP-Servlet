@@ -33,8 +33,8 @@ public class MemberDaoImpl implements IMemberDao {
 	}
 	
 	@Override
-	public List<MemberVO> memberList() throws Exception {
-		return smc.queryForList("member.memberList");
+	public List<MemberVO> memberList(Map<String, String> params) throws Exception {
+		return smc.queryForList("member.memberList",params);
 	}
 	
 	@Override

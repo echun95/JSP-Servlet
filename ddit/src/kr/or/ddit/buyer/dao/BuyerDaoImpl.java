@@ -31,8 +31,8 @@ public class BuyerDaoImpl implements IBuyerDao {
 	}
 
 	@Override
-	public List<Map<String, String>> buyerListAll() throws Exception {
-		return smc.queryForList("buyer.buyerListAll");
+	public List<Map<String, String>> buyerListAll(Map<String, String> params) throws Exception {
+		return smc.queryForList("buyer.buyerListAll",params);
 	}
 
 	@Override
