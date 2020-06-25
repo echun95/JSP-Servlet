@@ -84,4 +84,15 @@ public class FreeboardServiceImpl implements IFreeboardService {
 		}
 	}
 
+	
+	@Override
+	   public String insertFreeboardReply(FreeboardVO freeboardInfo) {
+	      String bo_no = null;
+	      try{
+	         bo_no = dao.insertFreeboardReply(freeboardInfo);
+	      }catch(Exception e){
+	         e.printStackTrace();
+	      }
+	      return bo_no ;
+	   }
 }

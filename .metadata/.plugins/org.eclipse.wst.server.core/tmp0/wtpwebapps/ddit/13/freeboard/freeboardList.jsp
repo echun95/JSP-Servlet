@@ -78,11 +78,19 @@ $(function() {
             </tr>
          </c:if>
          
-         <c:if test="${!empty freeboardList }">
+        <c:if test="${!empty freeboardList }">
             <c:forEach items="${freeboardList }" var="freeboardInfo">
                <tr>
                   <td><input type="hidden" value="${freeboardInfo.bo_no }"/>${freeboardInfo.rnum }</td>
-                  <td>${freeboardInfo.bo_title }</td>
+                  <td align="left">
+                     <c:forEach begin="1" end="${freeboardInfo.bo_depth }" varStatus="stat">
+                        &nbsp;&nbsp;&nbsp;
+                        <c:if test="${stat.last }">
+                           <i class="fa fa-angle-right"></i>
+                        </c:if>
+                     </c:forEach>
+                     ${freeboardInfo.bo_title }
+                  </td>
                   <td>${freeboardInfo.bo_nickname }</td>
                   <td>${freeboardInfo.bo_reg_date }</td>
                   <td>${freeboardInfo.bo_hit }</td>

@@ -47,5 +47,35 @@ public class FreeboardDaoImpl implements IFreeboardDao{
 	public void updateFreeboard(FreeboardVO freeboardInfo) throws Exception {
 		smc.update("board.updateFreeboard",freeboardInfo);
 	}
+	
+	@Override
+	   public String insertFreeboardReply(FreeboardVO freeboardInfo)
+	         throws Exception {
+	      //freeboardInfo : 댓글정보(bo_title, bo_nickname, bo_pwd, bo_mail, bo_content, bo_writer, bo_ip)
+	      //                부모 게시글 정보 (bo_group, bo_seq, bo_depth)
+	      String bo_no = "";
+	      try{
+	         smc.startTransaction();
+	         
+	         String bo_seq;
+	         if("0".intern() == freeboardInfo.getBo_seq().intern()){
+	            bo_seq = (String) smc.queryForObject("board.incrementSeq", freeboardInfo);
+	         }else{
+	        	smc.update("board.updateSeq", freeboardInfo);
+	            bo_seq = String.valueOf(Integer.parseInt(freeboardInfo.getBo_seq()) + 1);
+	         }
+	         freeboardInfo.setBo_seq(bo_seq);
+	         
+	         String bo_depth = String.valueOf(Integer.parseInt(freeboardInfo.getBo_depth()) + 1);
+	         freeboardInfo.setBo_depth(bo_depth);
+
+	         bo_no = (String) smc.insert("board.insertFreeboardReply", freeboardInfo);
+	         
+	         smc.commitTransaction();
+	      }finally{
+	    	  smc.endTransaction();
+	      }
+	      return bo_no;
+	   }
 
 }

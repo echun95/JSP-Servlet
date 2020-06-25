@@ -1,5 +1,8 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var="insertFreeboardInfoURI" value="/13/freeboard/insertFreeboardReplyInfo.jsp"></c:url>
+<c:url var="mainURI" value="/13/main.jsp"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,11 +48,24 @@ $(function(){
 		$(this).attr('action','${insertFreeboardInfoURI}');
 		
 		return true;
-	})
-    
-    
-    
+	});
+	
+	$('#btn1').click(function() {
+	      $(location).attr('href', '${mainURI}');
+	});
+	
+	
+	
 });
+
+
+function alertPrint(msg) {
+    BootstrapDialog.show({
+        title: '알림',
+        message: msg
+    });
+    return false;
+ }
 </script>
 </head>
 <body>
@@ -102,7 +118,7 @@ $(function(){
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" class="btn btn-success" style="float: right;">답글등록</button>
 			<button type="button" class="btn btn-danger">취소</button>
-			<button type="button" class="btn btn-info">목록</button>
+			<button type="button" class="btn btn-info" id="btn1">목록</button>
 		</div>
 	</div>
 </form>

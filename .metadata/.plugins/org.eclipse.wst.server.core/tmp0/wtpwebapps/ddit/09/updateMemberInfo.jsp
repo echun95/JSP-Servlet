@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+/*  	request.setCharacterEncoding("UTF-8"); */	
 	MemberVO memberInfo = new MemberVO();
 	try {
 		BeanUtils.populate(memberInfo, request.getParameterMap());

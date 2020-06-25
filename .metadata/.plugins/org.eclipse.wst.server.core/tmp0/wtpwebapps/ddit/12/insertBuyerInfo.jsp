@@ -7,7 +7,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+ /* 	request.setCharacterEncoding("UTF-8"); */
 	
 	BuyerVO buyerInfo = new BuyerVO();
 	
