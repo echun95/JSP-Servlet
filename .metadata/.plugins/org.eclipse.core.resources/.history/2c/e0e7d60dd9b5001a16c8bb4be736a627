@@ -1,0 +1,15 @@
+package kr.or.ddit.utiles;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+
+public class FileDownloadView {
+	public static void fileDownload(PageContext pageContext,
+										String downloadFileName) throws IOException{
+		HttpServletResponse response = pageContext.getResponse();
+		JspWriter out = pageContext.getOut(); 
+	}
+}

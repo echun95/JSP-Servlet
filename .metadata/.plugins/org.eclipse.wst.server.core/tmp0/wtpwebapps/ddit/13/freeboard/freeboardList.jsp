@@ -8,6 +8,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+
 	//freeboardList.jsp
 	//리다이렉스 요청 => (request[search_keycode | search_keyword],response)main.jsp
 	//c:import 포워드 -> freeboardList.jsp
@@ -17,7 +18,7 @@
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("search_keyword", search_keyword);
 	params.put("search_keycode", search_keycode);
-
+	
 	
     IFreeboardService service = FreeboardServiceImpl.getInstance();
     List<FreeboardVO> freeboardList = service.freeboardList(params);
@@ -50,7 +51,8 @@ $(function() {
    
    $('#freeboardTBY tr').click(function() {
       var bo_no = $(this).find('td:eq(0) input').val();
-      $(location).attr('href', '${freeboardViewURL}?bo_no=' + bo_no);
+      var rnum = $(this).find('td:eq(0)').text();
+      $(location).attr('href', '${freeboardViewURL}?bo_no=' + bo_no + '&rnum=' + rnum);
    });
 })
 </script>

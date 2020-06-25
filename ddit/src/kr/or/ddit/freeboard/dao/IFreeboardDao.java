@@ -3,6 +3,8 @@ package kr.or.ddit.freeboard.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileItem;
+
 import kr.or.ddit.vo.FreeboardVO;
 
 public interface IFreeboardDao {

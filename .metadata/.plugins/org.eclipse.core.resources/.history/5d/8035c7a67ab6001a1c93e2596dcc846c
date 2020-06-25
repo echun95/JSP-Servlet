@@ -1,0 +1,28 @@
+package kr.or.ddit.fileitem.service;
+
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.fileitem.dao.FileItemDaoImpl;
+import kr.or.ddit.vo.FileItemVO;
+
+public class FileItemServiceImpl implements IFileItemService {
+	private static IFileItemService service = new FileItemServiceImpl();
+	private FileItemDaoImpl dao;
+	
+	
+	public static IFileItemService getInstance(){
+		return (service == null)? service = new FileItemServiceImpl() : service;
+	}
+	
+	@Override
+	public void insertFileItem(List<FileItemVO> fileitemList){
+		
+	}
+
+	@Override
+	public FileItemVO fileitemInfo(Map<String, String> params){
+		return null;
+	}
+
+}

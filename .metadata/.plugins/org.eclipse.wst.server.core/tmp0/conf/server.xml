@@ -133,7 +133,7 @@
 	
 		
 	</Resource>
-</Context></Host>
+</Context><Context docBase="D:\temp\files" path="/files" reloadable="true"/></Host>
     </Engine>
   </Service>
 </Server>

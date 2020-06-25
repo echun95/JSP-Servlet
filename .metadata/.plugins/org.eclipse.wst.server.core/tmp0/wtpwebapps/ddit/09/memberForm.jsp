@@ -80,10 +80,14 @@ function zipcodePopup(){
 	var url = '${zipcodeSearchFormURI}';
 	var opts = 'width=400px, height=450px, status=no, resizable=no, scrollbars=no';
 	window.open(url,'우편번호검색',opts);	
-	
-	
 };
 
+function idPicOpenPopup(){
+	var url = '${pageContext.request.contextPath}/09/idPicFileuploadForm.jsp';
+	var opts = 'width=400px, height=450px, status=no, resizable=no, scrollbars=no';
+	window.open(url,'증명사진',opts);	
+	
+};
 </script>
 </head>
 <style>
@@ -98,7 +102,8 @@ td {text-align: left; }
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr><td rowspan="13" class="pic" colspan="2" style="vertical-align: bottom; width: 150px; text-align: center;">
 			<img src="${pageContext.request.contextPath }/image/btn_pic.gif" alt="사진올리기" class="btn" title="인적사항에 올릴 증명	을 검색합니다." 
-				style="cursor: pointer;"/><br/>
+				style="cursor: pointer;"
+				onclick="idPicOpenPopup();"/><br/>
 			<div style="width: 100%" align="center">
 				size : 235x315 이하
 			</div>

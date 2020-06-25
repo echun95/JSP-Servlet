@@ -6,6 +6,9 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url value="/13/main.jsp" var="freeboardReplyFormURI">
+	<c:param name="contentPage" value="/13/freeboard/freeboardReplyForm.jsp"></c:param>
+</c:url>
 <%
 	String bo_no = request.getParameter("bo_no");
 	Map<String,String> params = new HashMap<String,String>();
@@ -79,6 +82,24 @@ $(function(){
 	       });
 	   }
    })
+   //댓글
+   $('#btn3').click(function(){
+	   // /ddit/13/main.jsp?contentPage=/13/freeboard/freeboardReplyForm.jsp?rnum=${param.rnum}&bo_title=${freeboardInfo.bo_title}
+	   // 한글처리
+	   if(eval('${!empty LOGIN_MEMBERINFO}')){
+	   var bo_title = encodeURIComponent('${freeboardInfo.bo_title}');
+	   var queryString = '?rnum=${param.rnum}&bo_title='+bo_title;
+	   var parentInfo = '&bo_group=${freeboardInfo.bo_group}&bo_seq=${freeboardInfo.bo_seq}&bo_depth=${freeboardInfo.bo_depth}';
+	  $(location).attr('href','${freeboardReplyFormURI}' + queryString + parentInfo); 
+	   }
+	   else{
+		   BootstrapDialog.show({
+	             title: '알림',
+	             message: '로그인 후 작성이 가능합니다.'
+	       });
+	   }
+   });
+   
    //목록
     $('#btn4').click(function() {
       $(location).attr('href', '${mainURI}');
@@ -163,27 +184,21 @@ $(function(){
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-				<li data-target="#myCarousel" data-slide-to="3"></li>
 			</ol>
 	
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox" style="height: 200px;">
-				<div class="item active">
-					<img src="./images/thumbs/arch-1.jpg" alt="pic1">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/arch-2.jpg" alt="pic2">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/autumn-1.jpg" alt="pic3">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/boats-1.jpg" alt="pic4">
-				</div>
+				<c:forEach items="${freeboardInfo.items }" var="fileitemInfo" varStatus="stat">
+					<c:if test="${stat.first }">
+						<div class="item active">
+					</c:if>
+					<c:if test="${stat.last }">
+						<div class="item">
+					</c:if>
+					<img src="/files/${fileitemInfo.file_save_name }" alt="pic1"
+						onclick="javascript:location.href='${pageContext.request.contextPath }/13/fileDownload.jsp?file_seq=${fileitemInfo.file_seq }';">
+					</div>
+				</c:forEach>
 			</div>
 			<!-- Left and right controls -->
 			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>

@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.FileUploadRequestWrapper"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.freeboard.service.FreeboardServiceImpl"%>
 <%@page import="kr.or.ddit.freeboard.service.IFreeboardService"%>
@@ -7,13 +8,15 @@
     pageEncoding="UTF-8"%>
 <%
 	//클라이언트의 form 태그 서브밋시 쿼리스트링 전송방식 POST일때 한글 처리ㅣ
-	request.setCharacterEncoding("UTF-8");
+	//request.setCharacterEncoding("UTF-8");
+	FileUploadRequestWrapper wrapper = new FileUploadRequestWrapper(request);
 	
+
 	FreeboardVO freeboardInfo = new FreeboardVO();
-	BeanUtils.populate(freeboardInfo, request.getParameterMap());
+	BeanUtils.populate(freeboardInfo, wrapper.getParameterMap());
 	
 	IFreeboardService service = FreeboardServiceImpl.getInstance();
-	String bo_no = service.insertFreeboard(freeboardInfo);
+	String bo_no = service.insertFreeboard(freeboardInfo, wrapper.getFileItemValues("files"));
 	
 	response.sendRedirect(request.getContextPath()+"/13/main.jsp" );
 

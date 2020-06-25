@@ -1,0 +1,18 @@
+package kr.or.ddit.fileitem.dao;
+
+import java.util.List;
+
+import kr.or.ddit.fileitem.dao.IFileItemDao;
+import kr.or.ddit.vo.FileItemVO;
+
+public class FileItemDaoImpl implements IFileItemDao {
+	private static IFileItemDao dao;
+	
+	
+	
+	@Override
+	public void insertFileItem(List<FileItemVO> fileitemList) throws Exception {
+		
+	}
+
+}

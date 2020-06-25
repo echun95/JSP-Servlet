@@ -3,6 +3,8 @@ package kr.or.ddit.freeboard.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.fileupload.FileItem;
+
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.ibatis.factory.SqlMapClientFactory;
