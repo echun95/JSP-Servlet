@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.RolePaginationUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
@@ -14,6 +15,11 @@
 
 
 <%
+	String currentPage = request.getParameter("currentPage");
+	if(currentPage == null){
+		currentPage = "1";
+	}
+
 	String search_keyword = request.getParameter("search_keyword");
 	String search_keycode = request.getParameter("search_keycode"); 
 
@@ -22,14 +28,35 @@
 	params.put("search_keycode", search_keycode);
 
 	IMemberService service = MemberServiceImpl.getInstance();
+	
+	String totalCount = service.totalCount(params);
+    
+    RolePaginationUtil pagination = new RolePaginationUtil(request,
+    													   Integer.parseInt(currentPage),
+    													   Integer.parseInt(totalCount));
+    params.put("startCount", String.valueOf(pagination.getStartCount()));
+    params.put("endCount", String.valueOf(pagination.getEndCount()));
+	
 	List<MemberVO> memberList = service.memberList(params);
 	request.setAttribute("memberList", memberList);
 %>
-
-
+<c:set var="paginationMenu" value="<%=pagination.getPagingHtmls() %>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+	ul{
+		list-style-type: none;
+	}
+	.text-center{
+		display: inline-block;
+	}
+	li{
+		float: left;
+		margin: 10px;
+		color: yellow;
+	}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>
@@ -69,6 +96,7 @@
 	</tbody>
 	</table>
 </div>
+${paginationMenu }
 <div class="searchForm" align="right" style="margin-top: 10px;">
 	<form method="post" action="${pageContext.request.contextPath }/09/main.jsp">
 		<select name="search_keycode">

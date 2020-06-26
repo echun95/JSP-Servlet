@@ -59,5 +59,10 @@ public class BuyerDaoImpl implements IBuyerDao {
 	public String selectBuyerId(String buyer_lgu) throws Exception {
 		return (String)smc.queryForObject("buyer.selectBuyerId",buyer_lgu);
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) smc.queryForObject("buyer.totalCount",params);
+	}
 	
 }

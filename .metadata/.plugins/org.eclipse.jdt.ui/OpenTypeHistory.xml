@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=ddit/src&lt;kr.or.ddit.freeboard.service{IFreeboardService.java[IFreeboardService" modifiers="513" timestamp="1592976073736"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.freeboard.service{IFreeboardService.java[IFreeboardService" modifiers="513" timestamp="1593062792507"/>
 <typeInfo handle="=ddit/D:\/B_Util\/5.ApacheTomcat\/apache-tomcat-7.0.73\/lib\/servlet-api.jar&lt;javax.servlet.http(HttpServletRequestWrapper.class[HttpServletRequestWrapper" modifiers="33" timestamp="1478528994000"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.fileitem.service{IFileItemService.java[IFileItemService" modifiers="513" timestamp="1593044638729"/>
+<typeInfo handle="=ddit/D:\/B_Util\/2.Java\/JDK1.7\/jre\/lib\/rt.jar&lt;java.util.logging(Filter.class[Filter" modifiers="1537" timestamp="1579498259479"/>
+<typeInfo handle="=ddit/D:\/B_Util\/5.ApacheTomcat\/apache-tomcat-7.0.73\/lib\/servlet-api.jar&lt;javax.servlet(Filter.class[Filter" modifiers="1537" timestamp="1478528994000"/>
 </typeInfoHistroy>

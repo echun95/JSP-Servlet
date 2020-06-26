@@ -42,11 +42,16 @@
 	</select>
 	
 	<select id ="prodList" resultClass="prodVO" parameterClass="Map">
-		SELECT * 
-		FROM BUYER JOIN PROD ON(BUYER.BUYER_ID = PROD.PROD_BUYER)
-		WHERE PROD.PROD_DELETE = 'n'
-		<include refid="searchCondition"/>
-		
+		SELECT B.*
+		FROM
+			(SELECT ROWNUM RNUM, A.*
+			 FROM
+				(SELECT * 
+			 	 FROM BUYER JOIN PROD ON(BUYER.BUYER_ID = PROD.PROD_BUYER)
+			 	 WHERE PROD.PROD_DELETE = 'n'
+				 <include refid="searchCondition"/>) A
+			 ) B
+		WHERE B.RNUM BETWEEN #endCount# AND #startCount#
 	</select>
 	
 	<update id ="deleteProdInfo" parameterClass="Map">
@@ -85,5 +90,13 @@
 		select *
 		from lprod
 	</select>
+	
+	<select id="totalCount" parameterClass="map" resultClass="String">
+		SELECT count(*) 
+		FROM BUYER JOIN PROD ON(BUYER.BUYER_ID = PROD.PROD_BUYER)
+		WHERE PROD.PROD_DELETE = 'n'
+		<include refid="searchCondition"/>
+	</select>
+	
 	
 </sqlMap>

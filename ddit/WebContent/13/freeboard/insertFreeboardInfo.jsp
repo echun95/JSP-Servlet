@@ -9,7 +9,7 @@
 <%
 	//클라이언트의 form 태그 서브밋시 쿼리스트링 전송방식 POST일때 한글 처리ㅣ
  	/* request.setCharacterEncoding("UTF-8"); */
-	FileUploadRequestWrapper wrapper = new FileUploadRequestWrapper(request);
+	FileUploadRequestWrapper wrapper = (FileUploadRequestWrapper)request;
 	
 
 	FreeboardVO freeboardInfo = new FreeboardVO();

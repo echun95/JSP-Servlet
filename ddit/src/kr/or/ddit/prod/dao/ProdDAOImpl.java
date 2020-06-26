@@ -52,4 +52,9 @@ public class ProdDAOImpl implements IProdDAO {
 		return smc.queryForList("prod.lprodList");
 	}
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) smc.queryForObject("prod.totalCount",params);
+	}
+
 }

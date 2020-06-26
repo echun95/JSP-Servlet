@@ -35,11 +35,16 @@
 	</select>
 	
 	<select id="buyerListAll" resultClass="java.util.HashMap" parameterClass="Map">
-		select *
-		from lprod l join buyer b 
-		on(l.lprod_gu = b.buyer_lgu)
-		where b.buyer_delete = 'n'
-		<include refid="searchCondition"/>
+	   SELECT B.*
+	   FROM
+	   	   (SELECT ROWNUM RNUM, A.*
+	    	FROM(select *
+			 	 from lprod l join buyer b 
+			 	 on(l.lprod_gu = b.buyer_lgu)
+			 	 where b.buyer_delete = 'n'
+			 	 <include refid="searchCondition"/>) A
+		) B
+	   WHERE B.RNUM BETWEEN #endCount# AND #startCount#
 	</select>
 	
 	<select id="buyerInfo" resultClass="buyerVO" parameterClass="String">
@@ -72,4 +77,10 @@
 		where buyer_lgu = #buyer_lgu# 
 	</select>
 	
+	<select id="totalCount" parameterClass="map" resultClass="String">
+		select count(*)
+		from buyer
+		where buyer_delete = 'n' 
+		<include refid="searchCondition"/>
+	</select>
 </sqlMap>

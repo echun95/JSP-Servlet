@@ -56,4 +56,9 @@ public class MemberDaoImpl implements IMemberDao {
 	public void insertMemberInfo(MemberVO memberInfo) throws Exception {
 		smc.insert("member.insertMemberInfo", memberInfo);
 	}
+
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) smc.queryForObject("member.totalCount", params);
+	}
 }

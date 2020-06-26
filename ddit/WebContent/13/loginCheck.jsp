@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.listener.SessionManager"%>
 <%@page import="kr.or.ddit.utiles.CryptoGenerator"%>
 <%@page import="kr.or.ddit.member.service.MemberServiceImpl"%>
 <%@page import="java.net.URLEncoder"%>
@@ -13,6 +14,8 @@
 	
 	mem_id = CryptoGenerator.decryptRSA(session, mem_id);
 	mem_pass = CryptoGenerator.decryptRSA(session, mem_pass);
+	
+	SessionManager.getInstance().loginDuplicationCheck(session.getId(), mem_id);
 	
 	Map<String, String> params = new HashMap<String, String>();
 	params.put("mem_id", mem_id);

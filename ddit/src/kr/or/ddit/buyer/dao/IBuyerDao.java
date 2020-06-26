@@ -13,6 +13,7 @@ public interface IBuyerDao {
 	public void updateBuyerInfo(BuyerVO buyerInfo) throws Exception;
 	public void insertBuyerInfo(BuyerVO buyerInfo) throws Exception;
 	public String selectBuyerId(String buyer_lgu) throws Exception;
+	public String totalCount(Map<String, String> params) throws Exception;
 	
 	
 }

@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.RolePaginationUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.vo.FreeboardVO"%>
@@ -8,7 +9,10 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-
+	String currentPage = request.getParameter("currentPage");
+	if(currentPage == null){
+		currentPage = "1";
+	}
 	//freeboardList.jsp
 	//리다이렉스 요청 => (request[search_keycode | search_keyword],response)main.jsp
 	//c:import 포워드 -> freeboardList.jsp
@@ -19,12 +23,21 @@
 	params.put("search_keyword", search_keyword);
 	params.put("search_keycode", search_keycode);
 	
-	
     IFreeboardService service = FreeboardServiceImpl.getInstance();
-    List<FreeboardVO> freeboardList = service.freeboardList(params);
 
+    String totalCount = service.totalCount(params);
+    
+    RolePaginationUtil pagination = new RolePaginationUtil(request,
+    													   Integer.parseInt(currentPage),
+    													   Integer.parseInt(totalCount));
+
+    params.put("startCount", String.valueOf(pagination.getStartCount()));
+    params.put("endCount", String.valueOf(pagination.getEndCount()));
+    
+    List<FreeboardVO> freeboardList = service.freeboardList(params);
 %>
 <c:set var="freeboardList" value="<%=freeboardList %>"></c:set>
+<c:set var="paginationMenu" value="<%=pagination.getPagingHtmls() %>"></c:set>
 <c:url var="freeboardFormURI" value="/13/main.jsp">
    <c:param name="contentPage" value="/13/freeboard/freeboardForm.jsp"></c:param>
 </c:url>
@@ -101,6 +114,7 @@ $(function() {
       </table>
    </div>
 </div>
+${paginationMenu}
 <div >
 <form action="${pageContext.request.contextPath }/13/main.jsp" method="post" class="form-inline pull-right">
       <input id="search_keyword" name="search_keyword" type="text" placeholder="검색어 입력..." class="form-control" />

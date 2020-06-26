@@ -78,4 +78,9 @@ public class FreeboardDaoImpl implements IFreeboardDao{
 	      return bo_no;
 	   }
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) smc.queryForObject("board.totalCount",params);
+	}
+
 }
